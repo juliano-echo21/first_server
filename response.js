@@ -1,11 +1,8 @@
-exports.success = (req,res,message,status,header)=>{
-    res.header({
-        login : header
-    })
+exports.success = (req,res,message,status)=>{
     res.status(status)
         .send({
         error : "",
-        body : message,
+        body : message
     });
 };
 

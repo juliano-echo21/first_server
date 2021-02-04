@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser= require('body-parser');
 const routes = require('./routes');
-const router = require('./components/message/network');
+// const router = require('./components/message/network');
 
 const app = express()
 app.use(bodyParser.json());
