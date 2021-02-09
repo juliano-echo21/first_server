@@ -28,15 +28,15 @@ router
 
         // res.end()
     })
-    // .patch('/',(req,res)=>{
+    .patch('/',(req,res)=>{
+        controller.updateMessage(req.body.id,req.body.message)
+            .then( (data)=>{
+                response.success(req,res,data,200)
+            })
+            .catch( (error)=>{
+                response.error(req,res,error,500);
+            })
         
-    //     if(req.query.error == 'ok'){
-    //         response.error(req,res,'ops, algo ha salido mal',401,);
-    //     }
-    //     else{
-    //         response.success(req,res,'todo bien desde el patch',201,'');
-    //     }
-        
-    // })
+    })
 
 module.exports = router;
