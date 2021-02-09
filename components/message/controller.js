@@ -1,7 +1,13 @@
+ const store = require('./mock');
  
- 
- const createMessage = function (user,message){
+ const getMessage = function (user,message){
      return new Promise( (resolve,reject)=>{
+            resolve(store.list());
+     });
+ }
+
+ const addMessage = function(user,message){
+    return new Promise( (resolve,reject)=>{
         if(!user || !message){
             console.error('[messageController] hubo un error')
             reject("something went wrong");
@@ -13,12 +19,16 @@
                 message : message,
                 date : new Date()
             }
-            console.log(fullMessage)
+            // console.log(fullMessage)
+            store.add(fullMessage);
             resolve(fullMessage);
         }
      });
+
  }
 
  module.exports = {
-     createMessage
+     getMessage : getMessage,
+     addMessage : addMessage
+
  }
