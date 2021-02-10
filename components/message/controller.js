@@ -1,8 +1,11 @@
+const e = require('express');
 const store = require('./mock');
  
-const getMessage = function (user,message){
-    return new Promise( (resolve,reject)=>{
-           resolve(store.list());
+const getMessage = function (filter){
+    return new Promise( async (resolve,reject)=>{
+
+           const result = await store.getMessage(filter);
+           resolve(result);
     });
 }
 
@@ -40,9 +43,27 @@ const updateMessage = function(id,newMessage){
     })
 }
 
+const deleteMessage = function(id){
+    return new Promise( (resolve,reject)=>{
+        if(!id){
+            reject('[db error] invalid data');
+            return false;
+        }
+        store.remove(id)
+            .then( (data)=>{
+                resolve(data)
+            })
+            .catch( (e)=>{
+                reject(e)
+            })
+    })
+
+}
+
 module.exports = {
     getMessage : getMessage,
     addMessage : addMessage,
-    updateMessage : updateMessage
+    updateMessage : updateMessage,
+    deleteMessage : deleteMessage
 
 }
